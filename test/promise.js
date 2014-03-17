@@ -7,15 +7,15 @@ describe("API", function() {
 		promise = new Promise();
 	});
 	
-	it("should have a then handler", function() {
+	it("must provide a then method", function() {
 		assert(promise.then);
 	});
 
-	it("should have a resolve handler", function() {
+	it("must provide a resolve method", function() {
 		assert(promise.resolve);
 	});
 
-	it("should have a reject handler", function() {
+	it("must provide a reject method", function() {
 		assert(promise.reject);
 	});		
 	
@@ -44,6 +44,18 @@ describe("Basic", function() {
 		promise.resolve();
 		promise.resolve();
 		assert.equal(idx, 1);
+	});
+
+	it('may call then multiple times', function() {
+		var idx = 0;
+		promise.then(function() {
+			idx++;
+		});
+		promise.then(function() {
+			idx++;
+		});
+		promise.resolve();
+		assert.equal(idx, 2);
 	});
 
 	it('should resolve a promise with a reason', function(done) {
