@@ -22,7 +22,9 @@ describe("API", function() {
 });
 
 describe("utils", function() {
+
 	describe("thenable", function() {
+
 		it("returns true if object or function defines a then method", function() {
 			assert(!Promise.thenable({}));
 			assert(!Promise.thenable(function(){}));
@@ -30,6 +32,19 @@ describe("utils", function() {
 		});
 		
 	});
+
+	describe("resolve", function() {
+		it("rejects promise with a TypeError as the reason if promise and x refer to the same object", 
+			function(done) {
+			var promise = new Promise();
+			promise.then(null, function(val) {
+				if(val instanceof TypeError) done();
+			});
+			Promise.resolver(promise, promise);
+		});
+		
+	});
+	
 	
 });
 

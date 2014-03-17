@@ -33,6 +33,13 @@ Promise.thenable = function(obj) {
 };
 
 
+
+
+Promise.resolver = function(promise, x) {
+	if(promise === x) return promise.reject(new TypeError('objects same type'));
+};
+
+
 /**
  * Register callback to get promise value.
  * 
@@ -44,15 +51,15 @@ Promise.thenable = function(obj) {
 
 Promise.prototype.then = function(fulfilled, rejected) {
 	var promise = new Promise();
-	this.once('resolved', function(val) {
+	this.once('resolve', function(val) {
 		if(typeof fulfilled !== 'function') return promise.resolve(val);
 		try {
 			fulfilled(val);
 		} catch(e) {
 			promise.reject(e);
 		}
-	});;
-	this.once('rejected', function(val) {
+	});
+	this.once('reject', function(val) {
 		if(typeof rejected !== 'function') return promise.reject(val);
 		try {
 			rejected(val);
@@ -75,7 +82,7 @@ Promise.prototype.then = function(fulfilled, rejected) {
 
 Promise.prototype.resolve = function(value) {
 	this.state = 'fulfilled';
-	this.emit('resolved', value);
+	this.emit('resolve', value);
 };
 
 
@@ -90,6 +97,6 @@ Promise.prototype.resolve = function(value) {
 Promise.prototype.reject = function(reason) {
 	if(this.state !== 'fulfilled') {
 		this.state = 'rejected';
-		this.emit('rejected', reason);
+		this.emit('reject', reason);
 	}
 };
