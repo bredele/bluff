@@ -16,6 +16,19 @@ function Promise() {
 }
 
 
+//is an emitter
+
+require('component-emitter')(Promise.prototype);
+
+
 Promise.prototype.then = function(fulfilled, rejected) {
-	// body...
+	this.once('resolve', fulfilled);
+};
+
+Promise.prototype.resolve = function() {
+	this.emit('resolve');
+};
+
+Promise.prototype.reject = function() {
+	
 };

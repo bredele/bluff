@@ -3,7 +3,7 @@
 
   > It feelds good to reinvent the wheel
 
-  Promises A+ implementation based on [emitter](htp://github.com/component/emitter)
+  Promises implementation based on [emitter](htp://github.com/component/emitter)
 
 ## Installation
 
