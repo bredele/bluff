@@ -37,6 +37,14 @@ Promise.thenable = function(obj) {
 
 Promise.resolver = function(promise, x) {
 	if(promise === x) return promise.reject(new TypeError('objects same type'));
+	if(this.thenable(x)) {
+		//NOTE:to refactor
+		x.then(function(val) {
+			promise.resolve(val)
+		}, function(reason) {
+			promise.reject(reason);
+		});
+	}
 };
 
 

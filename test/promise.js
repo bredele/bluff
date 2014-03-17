@@ -33,7 +33,8 @@ describe("utils", function() {
 		
 	});
 
-	describe("resolve", function() {
+	describe("resolver(promise, x)", function() {
+
 		it("rejects promise with a TypeError as the reason if promise and x refer to the same object", 
 			function(done) {
 			var promise = new Promise();
@@ -42,6 +43,37 @@ describe("utils", function() {
 			});
 			Promise.resolver(promise, promise);
 		});
+
+		describe("x promise", function() {
+
+			var x, promise;
+			beforeEach(function() {
+				x = new Promise();
+				promise = new Promise();
+				Promise.resolver(promise, x);
+			});
+
+			it("adopts pending state", function() {
+				assert.equal(x.state, 'pending');
+				assert.equal(x.state, promise.state);
+			});
+
+			it('adopts fulfilled state', function(done) {
+				promise.then(function(val) {
+					if(val === 'value') done();
+				});
+				x.resolve('value');
+			});
+
+			it('adopts rejected state', function(done) {
+				promise.then(null,function(val) {
+					if(val === 'reason') done();
+				});
+				x.reject('reason');
+			});
+			
+		});
+		
 		
 	});
 	
