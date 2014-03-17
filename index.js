@@ -12,7 +12,7 @@ module.exports = Promise;
  */
 
 function Promise() {
-  //do something
+  this.state = 'pending';
 }
 
 
@@ -27,9 +27,13 @@ Promise.prototype.then = function(fulfilled, rejected) {
 };
 
 Promise.prototype.resolve = function(reason) {
+	this.state = 'fulfilled';
 	this.emit('resolved', reason);
 };
 
 Promise.prototype.reject = function() {
-	this.emit('rejected');
+	if(this.state !== 'fulfilled') {
+		this.state = 'rejected';
+		this.emit('rejected');
+	}
 };

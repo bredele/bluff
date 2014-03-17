@@ -88,7 +88,45 @@ describe("Basic", function() {
 			promise.reject();
 			assert.equal(idx, 1);
 		});
+
 	});
+
+	describe("state", function() {
+
+		it("should be pending by default", function() {
+			assert.equal(promise.state, 'pending');
+		});
+
+		it('should be fulfilled if resolved', function() {
+			promise.resolve();
+			assert.equal(promise.state, 'fulfilled');
+		});
+
+		it('should be rejected if rejected', function() {
+			promise.reject();
+			assert.equal(promise.state, 'rejected');
+		});
+
+		it('must not transition to any other state when fulfilled', function() {
+			promise.resolve();
+			promise.reject();
+			assert.equal(promise.state, 'fulfilled');
+		});
+
+		it('cannot reject a promise that has already be resolved', function() {
+			var idx = 0;
+			promise.then(function() {
+				idx = 1;
+			}, function() {
+				idx = 0;
+			});
+			promise.resolve();
+			promise.reject();
+			assert.equal(idx, 1);
+		});
+		
+	});
+	
 
 	
 });
