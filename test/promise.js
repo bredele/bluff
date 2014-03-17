@@ -162,6 +162,18 @@ describe("Basic", function() {
 			});
 			promise.reject('hello')
 		});
+
+		it("must reject the return promise with e as the reason if throws an exception e", function(done) {
+			var error = 'this is the reason';
+			var promise2 = promise.then(function() {
+				throw new Error(error);
+			});
+			promise2.then(null, function(reason) {
+				if(reason === error) done();
+			});
+			promise.resolve();
+		});
+		
 		
 		
 	});

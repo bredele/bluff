@@ -65,9 +65,9 @@ Promise.prototype.then = function(fulfilled, rejected) {
  * @api public
  */
 
-Promise.prototype.resolve = function(reason) {
+Promise.prototype.resolve = function(value) {
 	this.state = 'fulfilled';
-	this.emit('resolved', reason);
+	this.emit('resolved', value);
 };
 
 
