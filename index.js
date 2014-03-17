@@ -15,13 +15,22 @@ function Promise() {
   this.state = 'pending';
 }
 
-Promise.thenable = function(obj) {
-	return obj.then ? true : false;
-};
-
 //is an emitter
 
 require('component-emitter')(Promise.prototype);
+
+
+/**
+ * Return true if contains then method.
+ * 
+ * @param  {Object|Function} obj 
+ * @return {Boolean}
+ * @api public
+ */
+
+Promise.thenable = function(obj) {
+	return (typeof obj.then === 'function') ? true : false;
+};
 
 
 /**
