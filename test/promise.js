@@ -21,6 +21,19 @@ describe("API", function() {
 	
 });
 
+describe("utils", function() {
+	describe("thenable", function() {
+		it("returns true if object or function defines a then method", function() {
+			assert(!Promise.thenable({}));
+			assert(!Promise.thenable(function(){}));
+			assert(Promise.thenable({then:function(){}}));		
+		});
+		
+	});
+	
+});
+
+
 describe("Basic", function() {
 
 	var promise;
