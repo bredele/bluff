@@ -1,7 +1,7 @@
 {
   "name": "promise",
   "repo": "bredele/promise",
-  "description": "Promises A+ implementation",
+  "description": "Promises implementation",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {

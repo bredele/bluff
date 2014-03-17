@@ -17,7 +17,46 @@
 
 ## API
 
+### .then(fulfilled, rejected)
 
+ Register callbacks to receive either a promise’s eventual value or the reason why the promise cannot be fulfilled .
+
+```js
+promise.then(function() {
+  //on fulfilled
+}, function() {
+  //on rejected
+});
+```
+
+ `then` arguments are optionals
+
+### .resolve(reason)
+
+ Resolve/Fulfill promise with optional value.
+
+```js
+promise.resolve();
+```
+
+### .reject()
+
+ Reject promise.
+
+```js
+promise.reject();
+```
+
+### .state
+
+ Promise state is `pending` by default and may transition to either the `fulfilled` or `rejected` state.
+ A promise which is `fulfilled` or `rejected` can not transition to another state.
+
+```js
+promise.state;
+```
+
+ `state` is private and should not be changed outside of the `resolve` or `reject` handlers.
 
 ## License
 
