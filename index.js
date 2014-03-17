@@ -23,7 +23,7 @@ require('component-emitter')(Promise.prototype);
 
 Promise.prototype.then = function(fulfilled, rejected) {
 	this.once('resolved', fulfilled);
-	this.on('rejected', rejected);
+	this.once('rejected', rejected);
 };
 
 Promise.prototype.resolve = function(reason) {

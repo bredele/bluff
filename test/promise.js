@@ -76,7 +76,18 @@ describe("Basic", function() {
 				done();
 			});
 			promise.reject();
-		});		
+		});
+
+		it('should reject only once', function() {
+			var idx = 0;
+			promise.then(null, function() {
+				idx++;
+			});
+			promise.reject();
+			promise.reject();
+			promise.reject();
+			assert.equal(idx, 1);
+		});
 	});
 
 	
