@@ -25,8 +25,8 @@ Promise.prototype.then = function(fulfilled, rejected) {
 	this.once('resolve', fulfilled);
 };
 
-Promise.prototype.resolve = function() {
-	this.emit('resolve');
+Promise.prototype.resolve = function(reason) {
+	this.emit('resolve', reason);
 };
 
 Promise.prototype.reject = function() {
