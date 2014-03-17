@@ -56,7 +56,7 @@ promise.reject();
 promise.state;
 ```
 
- `state` is private and should not be changed outside of the `resolve` or `reject` handlers.
+ `state` is private and should not be changed outside of the [`resolve`](#resolve) or [`reject`](#reject) handlers.
 
 ## License
 
