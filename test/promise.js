@@ -34,6 +34,14 @@ describe("Basic", function() {
 		});
 		promise.resolve();
 	});
+
+	it('should resolve a promise with a reason', function(done) {
+		var reason = 'this is the reason';
+		promise.then(function(val) {
+			if(val === reason) done();
+		});
+		promise.resolve(reason);
+	});
 	
 });
 

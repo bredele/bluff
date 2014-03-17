@@ -3,7 +3,7 @@
 
   > It feelds good to reinvent the wheel
 
-  Promises implementation based on [emitter](htp://github.com/component/emitter)
+  Promises implementation based on [emitter](htp://github.com/component/emitter). It'll follow in the future the [A+ spec](http://promises-aplus.github.io/promises-spec/).
 
 ## Installation
 
