@@ -35,6 +35,17 @@ describe("Basic", function() {
 		promise.resolve();
 	});
 
+	it('should resolve a promise only once', function() {
+		var idx = 0;
+		promise.then(function() {
+			idx++;
+		});
+		promise.resolve();
+		promise.resolve();
+		promise.resolve();
+		assert.equal(idx, 1);
+	});
+
 	it('should resolve a promise with a reason', function(done) {
 		var reason = 'this is the reason';
 		promise.then(function(val) {
