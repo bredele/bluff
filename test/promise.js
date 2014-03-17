@@ -139,6 +139,15 @@ describe("Basic", function() {
 		});
 		
 	});
+
+	describe("then", function() {
+		it("should return a promise", function() {
+			var promise2 = promise.then();
+			assert(Promise.thenable(promise2));
+		});
+		
+	});
+	
 	
 
 	

@@ -43,8 +43,10 @@ Promise.thenable = function(obj) {
  */
 
 Promise.prototype.then = function(fulfilled, rejected) {
+	var promise = new Promise();
 	this.once('resolved', fulfilled);
 	this.once('rejected', rejected);
+	return promise;
 };
 
 
