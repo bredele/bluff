@@ -1,13 +1,19 @@
 
 # promise
 
-  Promises A+ implementation
+  > It feelds good to reinvent the wheel
+
+  Promises A+ implementation based on [emitter](htp://github.com/component/emitter)
 
 ## Installation
 
-  Install with [component(1)](http://component.io):
+  Install with [component](http://component.io):
 
     $ component install bredele/promise
+
+  Install with [nodejs](http://nodejs.orh):
+
+    $ npm install component-promise
 
 ## API
 

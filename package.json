@@ -20,5 +20,11 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bredele/promise/issues"
+  },
+  "dependencies": {
+    "component-emitter": "~1.1.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.0"
   }
 }
