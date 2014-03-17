@@ -141,10 +141,28 @@ describe("Basic", function() {
 	});
 
 	describe("then", function() {
+
 		it("should return a promise", function() {
 			var promise2 = promise.then();
 			assert(Promise.thenable(promise2));
 		});
+
+		it('must fill the return promise with the same value if not a function', function(done) {
+			var promise2 = promise.then();
+			promise2.then(function(val) {
+				if(val === 'hello') done();
+			});
+			promise.resolve('hello')
+		});
+
+		it("must reject the return promise with the same reason if not a function", function(done) {
+			var promise2 = promise.then();
+			promise2.then(null, function(val) {
+				if(val === 'hello') done();
+			});
+			promise.reject('hello')
+		});
+		
 		
 	});
 	
