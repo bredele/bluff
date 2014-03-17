@@ -46,11 +46,19 @@ Promise.prototype.then = function(fulfilled, rejected) {
 	var promise = new Promise();
 	this.once('resolved', function(val) {
 		if(typeof fulfilled !== 'function') return promise.resolve(val);
-		fulfilled(val);
+		try {
+			fulfilled(val);
+		} catch(e) {
+			promise.reject(e);
+		}
 	});;
 	this.once('rejected', function(val) {
 		if(typeof rejected !== 'function') return promise.reject(val);
-		rejected(val);
+		try {
+			rejected(val);
+		} catch(e) {
+			promise.reject(e);
+		}
 	});
 	return promise;
 };
