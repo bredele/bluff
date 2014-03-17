@@ -44,6 +44,11 @@ Promise.resolver = function(promise, x) {
 		}, function(reason) {
 			promise.reject(reason);
 		});
+	} else if(typeof x === 'object' || typeof x === 'function') {
+		//NOTE:refactor if with thenable
+		var then = x.then;
+	} else {
+		promise.resolve(x);
 	}
 };
 

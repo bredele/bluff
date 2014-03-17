@@ -73,6 +73,24 @@ describe("utils", function() {
 			});
 			
 		});
+
+		describe("x object or function", function() {
+			//NOTE: it nevers doesn that, it would return undefined
+			it("reject promise with e as the reason if x.then triggers exception e");
+			
+		});
+		
+		describe("x not object or function or promise", function() {
+			it("should resolve promise with x", function(done) {
+				var promise = new Promise();
+				promise.then(function(val) {
+					if(val === 'thats why') done();
+				});
+				Promise.resolver(promise, 'thats why');
+			});
+			
+		});
+		
 		
 		
 	});
