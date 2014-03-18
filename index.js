@@ -29,35 +29,35 @@ require('component-emitter')(Promise.prototype);
  */
 
 Promise.thenable = function(obj) {
-	return (typeof obj.then === 'function') ? true : false;
+  return (typeof obj.then === 'function') ? true : false;
 };
 
 
 
 
 Promise.resolver = function(promise, x) {
-	if(promise === x) return promise.reject(new TypeError('objects same type'));
-	if(this.thenable(x)) {
-		//NOTE:to refactor
-		x.then(function(val) {
-			promise.resolve(val)
-		}, function(reason) {
-			promise.reject(reason);
-		});
-	} 
-	// else if(typeof x === 'object' || typeof x === 'function') {
-	// 	//NOTE:refactor if with thenable
-	// 	var then = x.then;
-	// 	then.call(x, function(val) {
-	// 		Promise.resolve(promise, val);
-	// 	}, function(reason) {
-	// 		promise.reject(reason);
-	// 	});
+  if(promise === x) return promise.reject(new TypeError('objects same type'));
+  if(this.thenable(x)) {
+    //NOTE:to refactor
+    x.then(function(val) {
+      promise.resolve(val)
+    }, function(reason) {
+      promise.reject(reason);
+    });
+  } 
+  // else if(typeof x === 'object' || typeof x === 'function') {
+  //  //NOTE:refactor if with thenable
+  //  var then = x.then;
+  //  then.call(x, function(val) {
+  //    Promise.resolve(promise, val);
+  //  }, function(reason) {
+  //    promise.reject(reason);
+  //  });
 
-	// } 
-	else {
-		promise.resolve(x);
-	}
+  // } 
+  else {
+    promise.resolve(x);
+  }
 };
 
 
@@ -73,15 +73,15 @@ Promise.resolver = function(promise, x) {
  */
 
 function once(state, promise, fn) {
-	return function(val) {
-		if(typeof fn !== 'function') return promise[state](val);
-		try {
-			var x = fn(val);
-			if(x) Promise.resolver(promise, x);
-		} catch(e) {
-			promise.reject(e);
-		}
-	}
+  return function(val) {
+    if(typeof fn !== 'function') return promise[state](val);
+    try {
+      var x = fn(val);
+      if(x) Promise.resolver(promise, x);
+    } catch(e) {
+      promise.reject(e);
+    }
+  }
 }
 
 
@@ -95,10 +95,10 @@ function once(state, promise, fn) {
  */
 
 Promise.prototype.then = function(fulfilled, rejected) {
-	var promise = new Promise();
-	this.once('resolve', once('resolve', promise, fulfilled));
-	this.once('reject', once('reject', promise, rejected));
-	return promise;
+  var promise = new Promise();
+  this.once('resolve', once('resolve', promise, fulfilled));
+  this.once('reject', once('reject', promise, rejected));
+  return promise;
 };
 
 
@@ -112,8 +112,8 @@ Promise.prototype.then = function(fulfilled, rejected) {
  */
 
 Promise.prototype.resolve = function(value) {
-	this.state = 'fulfilled';
-	this.emit('resolve', value);
+  this.state = 'fulfilled';
+  this.emit('resolve', value);
 };
 
 
@@ -126,8 +126,8 @@ Promise.prototype.resolve = function(value) {
  */
 
 Promise.prototype.reject = function(reason) {
-	if(this.state !== 'fulfilled') {
-		this.state = 'rejected';
-		this.emit('reject', reason);
-	}
+  if(this.state !== 'fulfilled') {
+    this.state = 'rejected';
+    this.emit('reject', reason);
+  }
 };
