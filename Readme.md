@@ -31,7 +31,7 @@ promise.then(function() {
 
  `then` arguments are optionals
 
-### .resolve(reason)
+### .resolve(value)
 
  Resolve/Fulfill promise with optional value.
 
@@ -39,9 +39,9 @@ promise.then(function() {
 promise.resolve();
 ```
 
-### .reject()
+### .reject(reason)
 
- Reject promise.
+ Reject promise with optional reason.
 
 ```js
 promise.reject();
