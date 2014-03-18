@@ -1,7 +1,7 @@
 {
   "name": "component-promise",
-  "version": "0.0.1",
-  "description": "Promises implementation",
+  "version": "0.0.2",
+  "description": "Promises A+ implementation",
   "main": "index.js",
   "scripts": {
     "test": "mocha"

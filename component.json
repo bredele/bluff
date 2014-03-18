@@ -1,8 +1,8 @@
 {
   "name": "promise",
   "repo": "bredele/promise",
-  "description": "Promises implementation",
-  "version": "0.0.1",
+  "description": "Promises A+ implementation",
+  "version": "0.0.2",
   "keywords": [],
   "dependencies": {
     "component/emitter": "*"
