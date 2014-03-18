@@ -38,24 +38,20 @@ Promise.thenable = function(obj) {
 Promise.resolver = function(promise, x) {
   if(promise === x) return promise.reject(new TypeError('objects same type'));
   if(this.thenable(x)) {
-    //NOTE:to refactor
-    x.then(function(val) {
-      promise.resolve(val)
-    }, function(reason) {
-      promise.reject(reason);
-    });
-  } 
-  // else if(typeof x === 'object' || typeof x === 'function') {
-  //  //NOTE:refactor if with thenable
-  //  var then = x.then;
-  //  then.call(x, function(val) {
-  //    Promise.resolve(promise, val);
-  //  }, function(reason) {
-  //    promise.reject(reason);
-  //  });
-
-  // } 
-  else {
+    try {
+      var then = x.then;
+      //NOTE: If both resolvePromise and rejectPromise are called, 
+      //or multiple calls to the same argument are made, 
+      //the first call takes precedence, and any further calls are ignored.
+      then.call(x, function(val) {
+        Promise.resolver(promise, val);
+      }, function(reason) {
+        promise.reject(reason);
+      });
+    } catch(e) {
+      promise.reject(e);
+    }
+  } else {
     promise.resolve(x);
   }
 };
