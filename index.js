@@ -44,13 +44,45 @@ Promise.resolver = function(promise, x) {
 		}, function(reason) {
 			promise.reject(reason);
 		});
-	} else if(typeof x === 'object' || typeof x === 'function') {
-		//NOTE:refactor if with thenable
-		var then = x.then;
-	} else {
+	} 
+	// else if(typeof x === 'object' || typeof x === 'function') {
+	// 	//NOTE:refactor if with thenable
+	// 	var then = x.then;
+	// 	then.call(x, function(val) {
+	// 		Promise.resolve(promise, val);
+	// 	}, function(reason) {
+	// 		promise.reject(reason);
+	// 	});
+
+	// } 
+	else {
 		promise.resolve(x);
 	}
 };
+
+
+/**
+ * Register once a fulfilled or rejected
+ * callback.
+ * 
+ * @param  {String}   state   
+ * @param  {Promise}   promise 
+ * @param  {Function} fn    
+ * @return {Function} 
+ * @api private
+ */
+
+function once(state, promise, fn) {
+	return function(val) {
+		if(typeof fn !== 'function') return promise[state](val);
+		try {
+			var x = fn(val);
+			if(x) Promise.resolver(promise, x);
+		} catch(e) {
+			promise.reject(e);
+		}
+	}
+}
 
 
 /**
@@ -64,22 +96,8 @@ Promise.resolver = function(promise, x) {
 
 Promise.prototype.then = function(fulfilled, rejected) {
 	var promise = new Promise();
-	this.once('resolve', function(val) {
-		if(typeof fulfilled !== 'function') return promise.resolve(val);
-		try {
-			fulfilled(val);
-		} catch(e) {
-			promise.reject(e);
-		}
-	});
-	this.once('reject', function(val) {
-		if(typeof rejected !== 'function') return promise.reject(val);
-		try {
-			rejected(val);
-		} catch(e) {
-			promise.reject(e);
-		}
-	});
+	this.once('resolve', once('resolve', promise, fulfilled));
+	this.once('reject', once('reject', promise, rejected));
 	return promise;
 };
 
