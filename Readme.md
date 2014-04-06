@@ -58,6 +58,15 @@ promise.state;
 
  `state` is private and should not be changed outside of the [`resolve`](#resolve) or [`reject`](#reject) handlers.
 
+
+## Note
+
+`promise` is part of a collection of asynchronous patterns based on [emitter](http://github.com/component/emitter):
+  - [states](http://github.com/bredele/states)
+  - [doors](http://github.com/bredele/doors)
+  - [emitter-queue](http://github.com/bredele/emitter-queue)
+
+
 ## License
 
   The MIT License (MIT)

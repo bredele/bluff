@@ -1,7 +1,7 @@
 {
-  "name": "component-promise",
-  "version": "0.0.2",
-  "description": "Promises A+ implementation",
+  "name": "bredele-promise",
+  "version": "0.1.0",
+  "description": "Promises A+ implementation based on emitter",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
