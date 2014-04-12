@@ -1,4 +1,3 @@
-
 # promise
 
   > It feelds good to reinvent the wheel
@@ -13,7 +12,7 @@
 
   Install with [nodejs](http://nodejs.orh):
 
-    $ npm install component-promise
+    $ npm install bredele-promise
 
 ## API
 
