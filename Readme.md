@@ -1,91 +1,61 @@
-# promise
+# Bluff
 
-  > It feelds good to reinvent the wheel
+  > [![Build Status](https://travis-ci.org/bredele/bluff.svg?branch=master)](https://travis-ci.org/bredele/bluff)
+  [![NPM](https://img.shields.io/npm/v/bluff.svg)](https://www.npmjs.com/package/bluff)
+  [![Downloads](https://img.shields.io/npm/dm/bluff.svg)](http://npm-stat.com/charts.html?package=bluff)
+  [![pledge](https://bredele.github.io/contributing-guide/community-pledge.svg)](https://github.com/bredele/contributing-guide/blob/master/community.md)
 
-  Promises implementation based on [emitter](htp://github.com/component/emitter). It follows [A+ spec](http://promises-aplus.github.io/promises-spec/).
+Ridiculously small promise implementation based on the [A+ spec](http://promises-aplus.github.io/promises-spec/).
+
+[Try it online!]()
+
+## Usage
+
+```js
+var promise = require('bluff')
+
+```
+
+Check out [examples](/examples) and [docs](/doc) for more information.
 
 ## Installation
 
-  Install with [component](http://component.io):
-
-    $ component install bredele/promise
-
-  Install with [nodejs](http://nodejs.orh):
-
-    $ npm install bredele-promise
-
-## API
-
-### .then(fulfilled, rejected)
-
- Register callbacks to receive either a promise’s eventual value or the reason why the promise cannot be fulfilled .
-
-```js
-promise.then(function() {
-  //on fulfilled
-}, function() {
-  //on rejected
-});
+```shell
+npm install bluff --save
 ```
 
- `then` arguments are optionals
-
-### .resolve(value)
-
- Resolve/Fulfill promise with optional value.
-
-```js
-promise.resolve();
-```
-
-### .reject(reason)
-
- Reject promise with optional reason.
-
-```js
-promise.reject();
-```
-
-### .state
-
- Promise state is `pending` by default and may transition to either the `fulfilled` or `rejected` state.
- A promise which is `fulfilled` or `rejected` can not transition to another state.
-
-```js
-promise.state;
-```
-
- `state` is private and should not be changed outside of the [`resolve`](#resolve) or [`reject`](#reject) handlers.
+[![NPM](https://nodei.co/npm/bluff.png)](https://nodei.co/npm/bluff/)
 
 
-## Note
+## Question
 
-`promise` is part of a collection of asynchronous patterns based on [emitter](http://github.com/component/emitter):
-  - [states](http://github.com/bredele/states)
-  - [doors](http://github.com/bredele/doors)
-  - [emitter-queue](http://github.com/bredele/emitter-queue)
+For questions and feedback please use our [twitter account](https://twitter.com/bredeleca). For support, bug reports and or feature requests please make sure to read our
+<a href="https://github.com/bredele/contributing-guide" target="_blank">community guideline</a> and use the issue list of this repo and make sure it's not present yet in our reporting checklist.
 
+## Contribution
+
+Datastore is an open source project and would not exist without its community. If you want to participate please make sure to read our <a href="https://github.com/bredele/contributing-guide" target="_blank">guideline</a> before making a pull request. If you have any datastore-related project, component or other let everyone know in our wiki.
 
 ## License
 
-  The MIT License (MIT)
+The MIT License (MIT)
 
-  Copyright (c) 2014 <copyright holders>
+Copyright (c) 2016 Olivier Wietrich
 
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-  The above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-  THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
