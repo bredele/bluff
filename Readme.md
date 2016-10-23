@@ -34,7 +34,7 @@ For questions and feedback please use our [twitter account](https://twitter.com/
 
 ## Contribution
 
-Datastore is an open source project and would not exist without its community. If you want to participate please make sure to read our <a href="https://github.com/bredele/contributing-guide" target="_blank">guideline</a> before making a pull request. If you have any datastore-related project, component or other let everyone know in our wiki.
+Bluff is an open source project and would not exist without its community. If you want to participate please make sure to read our <a href="https://github.com/bredele/contributing-guide" target="_blank">guideline</a> before making a pull request. If you have any bluff-related project, component or other let everyone know in our wiki.
 
 ## License
 
