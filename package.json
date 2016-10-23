@@ -1,14 +1,14 @@
 {
-  "name": "bredele-promise",
-  "version": "0.1.0",
-  "description": "Promises A+ implementation based on emitter",
+  "name": "bluff",
+  "version": "0.0.0",
+  "description": "Small promise implementation based on the A+ spec",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "browserify test/*.js | tape-run"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/bredele/promise.git"
+    "url": "git://github.com/bredele/bluff.git"
   },
   "keywords": [
     "promise",
@@ -19,12 +19,11 @@
   "author": "Olivier Wietrich <olivier.wietrich@gmail.com> (http://github.com/bredele)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bredele/promise/issues"
-  },
-  "dependencies": {
-    "component-emitter": "~1.1.2"
+    "url": "https://github.com/bredele/bluff/issues"
   },
   "devDependencies": {
-    "mocha": "~1.18.0"
+    "browserify": "^13.1.1",
+    "tape": "^4.6.2",
+    "tape-run": "^2.1.4"
   }
 }
