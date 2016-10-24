@@ -1,5 +1,4 @@
 
-
 /**
  * Promise A+ implementation.
  *
@@ -13,42 +12,56 @@ module.exports = function promise(resolver) {
   var rejected = []
   return {
     then: function(success, error) {
-      if(typeof success != 'function') success = function(value) {
-        return value
-      }
-
-      if(typeof error != 'function') error = function(reason) {
-        return reason
-      }
-      resolver && resolver(function(value) {
-        var val
-        try {
-          val = success(value)
-          fulfilled.map(function(cb) {
-            cb(val || value)
-          })
-        } catch(e) {
-          rejected.map(function(cb) {
-            cb(e)
-          })
-        }
-
-      }, function(reason) {
-        var val
-        try {
-          val = error(reason)
-          rejected.map(function(cb) {
-            cb(val || reason)
-          })
-        } catch(e) {
-          rejected.map(function(cb) {
-            cb(e)
-          })
-        }
-      })
+      resolver && resolver(
+        resolution(callback(success), fulfilled, rejected),
+        resolution(callback(error), rejected, rejected)
+      )
       return promise(function(resolve, reject) {
         fulfilled.push(resolve)
         rejected.push(reject)
+      })
+    }
+  }
+}
+
+
+/**
+ * Transform value into function.
+ *
+ * @return {Any} cb
+ * @return {Function}
+ * @ api private
+ */
+
+function callback(cb) {
+  return typeof cb != 'function'
+    ? function(value) {
+      return value
+    } : cb
+}
+
+
+/**
+ * Promise resolution procedure.
+ *
+ * @param {Function} cb
+ * @param {Array} fulfilled callbacks
+ * @param {Array} rejected callbacks
+ * @return {Function}
+ * @api private
+ */
+
+function resolution(cb, fulfilled, rejected) {
+  return function(value) {
+    var returned
+    try {
+      returned = cb(value)
+      fulfilled.map(function(fn) {
+        fn(returned || value)
+      })
+    } catch(e) {
+      rejected.map(function(fn) {
+        fn(e)
       })
     }
   }
