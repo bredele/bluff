@@ -25,6 +25,8 @@ function readJSON(filename){
     }, reject);
   });
 }
+
+readJSON('package.json').then(data => doSomething(data))
 ```
 
 Check out [examples](/examples) and [docs](/doc) for more information.
