@@ -158,3 +158,13 @@ test('If onRejected is not a function and promise1 is rejected, promise2 must be
 		assert.equal(reason, 'hello')
 	})
 })
+
+
+test('should work with synchronous call to resolve', assert => {
+	assert.plan(1)
+	bluff(function(resolve) {
+		resolve('hello')
+	}).then(function(value) {
+		assert.equal(value, 'hello')
+	})
+})
