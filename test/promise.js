@@ -84,3 +84,29 @@ test('then must return a promise', assert => {
 	var promise = bluff().then()
 	assert.equal(typeof promise.then, 'function')
 })
+
+test('returned promise should take as value the value returned by the previous promise', assert => {
+	assert.plan(1)
+	bluff(function(resolve) {
+		setTimeout(function() {
+			resolve('hello')
+		}, 100)
+	}).then(function(value) {
+		return value + ' world'
+	}).then(function(value) {
+		assert.equal(value, 'hello world')
+	})
+})
+
+test('returned promise should take as reason the reason returned by the previous promise', assert => {
+	assert.plan(1)
+	bluff(function(resolve, reject) {
+		setTimeout(function() {
+			reject('hello')
+		}, 100)
+	}).then(null, function(reason) {
+		return reason + ' world'
+	}).then(null, function(reason) {
+		assert.equal(reason, 'hello world')
+	})
+})

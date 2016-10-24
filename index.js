@@ -14,9 +14,14 @@ module.exports = function promise(resolver) {
   })
   return {
     then: function(success, error) {
-      fulfilled.push(success)
-      rejected.push(error)
-      return promise()
+      return promise(function(resolve, reject) {
+        fulfilled.push(function(value) {
+          resolve(success(value))
+        })
+        rejected.push(function(reason) {
+          reject(error(reason))
+        })
+      })
     }
   }
 }
