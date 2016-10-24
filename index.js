@@ -12,9 +12,9 @@ module.exports = function promise(resolver) {
   var fulfilled = []
   var rejected = []
   resolver && resolver(function(value) {
-    fulfilled.map(cb => cb && cb(value))
+    fulfilled.map(cb => cb(value))
   }, function(reason) {
-    rejected.map(cb => cb && cb(reason))
+    rejected.map(cb => cb(reason))
   })
   return {
     then: function(success, error) {
