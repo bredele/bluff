@@ -147,3 +147,14 @@ test('If onFulfilled is not a function and promise1 is fulfilled, promise2 must 
 		assert.equal(value, 'hello')
 	})
 })
+
+test('If onRejected is not a function and promise1 is rejected, promise2 must be rejected with the same reason as promise1', assert => {
+	assert.plan(1)
+	bluff(function(resolve, reject) {
+		setTimeout(function() {
+			reject('hello')
+		}, 100)
+	}).then(null, null).then(null, function(reason) {
+		assert.equal(reason, 'hello')
+	})
+})
