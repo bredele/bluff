@@ -1,6 +1,6 @@
 {
   "name": "bluff",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "description": "Small promise implementation based on the A+ spec",
   "main": "index.js",
   "scripts": {
