@@ -5,7 +5,7 @@
   [![Downloads](https://img.shields.io/npm/dm/bluff.svg)](http://npm-stat.com/charts.html?package=bluff)
   [![pledge](https://bredele.github.io/contributing-guide/community-pledge.svg)](https://github.com/bredele/contributing-guide/blob/master/guidelines.md)
 
-Ridiculously small promise implementation based on the [A+ spec](http://promises-aplus.github.io/promises-spec/). Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
+Ridiculously small promise implementation based on the [A+ spec](/test). Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
 
 [Try it online!](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a)
 
