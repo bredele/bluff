@@ -78,3 +78,9 @@ test('then may be called multiple times on the same promise if rejected', assert
 		assert.equal(result, 'hello')
 	})
 })
+
+test('then must return a promise', assert => {
+	assert.plan(1)
+	var promise = bluff().then()
+	assert.equal(typeof promise.then, 'function')
+})

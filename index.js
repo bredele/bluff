@@ -4,7 +4,7 @@
  *
  */
 
-module.exports = function(resolver) {
+module.exports = function promise(resolver) {
   var fulfilled = []
   var rejected = []
   resolver && resolver(function(value) {
@@ -16,6 +16,7 @@ module.exports = function(resolver) {
     then: function(success, error) {
       fulfilled.push(success)
       rejected.push(error)
+      return promise()
     }
   }
 }
