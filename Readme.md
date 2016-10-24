@@ -29,7 +29,7 @@ function readJSON(filename){
 readJSON('package.json').then(data => doSomething(data))
 ```
 
-Check out [examples](/examples) and [tests](/test) for more information.
+Check out [examples](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a) and [tests](/test) for more information.
 
 ## Installation
 
