@@ -16,10 +16,18 @@ module.exports = function promise(resolver) {
     then: function(success, error) {
       return promise(function(resolve, reject) {
         fulfilled.push(function(value) {
-          resolve(success(value))
+          try {
+            resolve(success(value))
+          } catch(e) {
+            reject(e)
+          }
         })
         rejected.push(function(reason) {
-          reject(error(reason))
+          try {
+            reject(error(reason))
+          } catch(e) {
+            reject(e)
+          }
         })
       })
     }

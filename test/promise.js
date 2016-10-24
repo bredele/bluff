@@ -110,3 +110,29 @@ test('returned promise should take as reason the reason returned by the previous
 		assert.equal(reason, 'hello world')
 	})
 })
+
+test('returned promise should be reject with e as the reason if exception is trigerred in fulfilled then', assert => {
+	assert.plan(1)
+	bluff(function(resolve) {
+		setTimeout(function() {
+			resolve('hello')
+		}, 100)
+	}).then(function(value) {
+		throw 'this is an exception'
+	}).then(null, function(reason) {
+		assert.equal(reason, 'this is an exception')
+	})
+})
+
+test('returned promise should be reject with e as the reason if exception is trigerred in rejected then', assert => {
+	assert.plan(1)
+	bluff(function(resolve, reject) {
+		setTimeout(function() {
+			reject('hello')
+		}, 100)
+	}).then(null, function(value) {
+		throw 'this is an exception'
+	}).then(null, function(reason) {
+		assert.equal(reason, 'this is an exception')
+	})
+})
