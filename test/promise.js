@@ -25,6 +25,15 @@ test('then must be called after promise is fulfilled with value as its first arg
 	})
 })
 
+test('then should work with synchronous call to resolve', assert => {
+	assert.plan(1)
+	bluff(function(resolve) {
+		resolve('hello')
+	}).then(function(value) {
+		assert.equal(value, 'hello')
+	})
+})
+
 
 test('then must be called after promise is rejected with reason as its first argument', assert => {
 	assert.plan(1)
@@ -35,6 +44,15 @@ test('then must be called after promise is rejected with reason as its first arg
 	})
 
 	promise.then(null, function(reason) {
+		assert.equal(reason, 'hello')
+	})
+})
+
+test('then should work with synchronous call to reject', assert => {
+	assert.plan(1)
+	bluff(function(resolve, reject) {
+		reject('hello')
+	}).then(null, function(reason) {
 		assert.equal(reason, 'hello')
 	})
 })
@@ -156,15 +174,5 @@ test('If onRejected is not a function and promise1 is rejected, promise2 must be
 		}, 100)
 	}).then(null, null).then(null, function(reason) {
 		assert.equal(reason, 'hello')
-	})
-})
-
-
-test('should work with synchronous call to resolve', assert => {
-	assert.plan(1)
-	bluff(function(resolve) {
-		resolve('hello')
-	}).then(function(value) {
-		assert.equal(value, 'hello')
 	})
 })
