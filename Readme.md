@@ -7,7 +7,7 @@
 
 Ridiculously small promise implementation based on the [A+ spec](http://promises-aplus.github.io/promises-spec/). Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
 
-[Try it online!]()
+[Try it online!](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a)
 
 ## Usage
 
