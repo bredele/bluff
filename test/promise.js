@@ -111,7 +111,7 @@ test('returned promise should take as reason the reason returned by the previous
 	})
 })
 
-test('returned promise should be reject with e as the reason if exception is trigerred in fulfilled then', assert => {
+test('If onFullfilled throws an exception e, promise2 must be rejected with e as the reason.', assert => {
 	assert.plan(1)
 	bluff(function(resolve) {
 		setTimeout(function() {
@@ -124,7 +124,7 @@ test('returned promise should be reject with e as the reason if exception is tri
 	})
 })
 
-test('returned promise should be reject with e as the reason if exception is trigerred in rejected then', assert => {
+test('If onRejected throws an exception e, promise2 must be rejected with e as the reason.', assert => {
 	assert.plan(1)
 	bluff(function(resolve, reject) {
 		setTimeout(function() {
@@ -134,5 +134,16 @@ test('returned promise should be reject with e as the reason if exception is tri
 		throw 'this is an exception'
 	}).then(null, function(reason) {
 		assert.equal(reason, 'this is an exception')
+	})
+})
+
+test('If onFulfilled is not a function and promise1 is fulfilled, promise2 must be fulfilled with the same value as promise1', assert => {
+	assert.plan(1)
+	bluff(function(resolve) {
+		setTimeout(function() {
+			resolve('hello')
+		}, 100)
+	}).then(null).then(function(value) {
+		assert.equal(value, 'hello')
 	})
 })

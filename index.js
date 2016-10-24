@@ -14,6 +14,9 @@ module.exports = function promise(resolver) {
   })
   return {
     then: function(success, error) {
+      if(typeof success != 'function') success = function(value) {
+        return value
+      }
       return promise(function(resolve, reject) {
         fulfilled.push(function(value) {
           try {
