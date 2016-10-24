@@ -24,3 +24,17 @@ test('then must be called after promise is fulfilled with value as its first arg
 		assert.equal(value, 'hello')
 	})
 })
+
+
+test('then must be called after promise is rejected with reason as its first argument', assert => {
+	assert.plan(1)
+	var promise = bluff(function(resolve, reject) {
+		setTimeout(function() {
+			reject('hello')
+		}, 100)
+	})
+
+	promise.then(null, function(reason) {
+		assert.equal(reason, 'hello')
+	})
+})

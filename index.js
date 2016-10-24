@@ -5,13 +5,17 @@
  */
 
 module.exports = function(resolver) {
-  var cbs = []
+  var fulfilled = []
+  var rejected = []
   resolver && resolver(function(value) {
-    cbs.map(fn => fn(value))
+    fulfilled.map(cb => cb && cb(value))
+  }, function(reason) {
+    rejected.map(cb => cb && cb(reason))
   })
   return {
-    then: function(onFulfilled) {
-      cbs.push(onFulfilled)
+    then: function(success, error) {
+      fulfilled.push(success)
+      rejected.push(error)
     }
   }
 }
