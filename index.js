@@ -37,7 +37,11 @@ module.exports = function promise(resolver) {
             }
           })
           rejected.push(function(reason) {
-            error(reject(reason))
+            try {
+              error(reject(reason))
+            } catch(e) {
+              error(e)
+            }
           })
         } else if(state == 'fulfilled') success(fulfill(result))
         else error(reject(result))
