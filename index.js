@@ -8,10 +8,15 @@
  */
 
 module.exports = function promise(resolver) {
-  resolver()
+  var fulfilled = []
+  resolver(function(value) {
+    fulfilled.map(function(cb) {
+      cb(value)
+    })
+  })
   return {
-    then: function() {
-      
+    then: function(fulfill, reject) {
+      fulfilled.push(fulfill)
     }
   }
 }
