@@ -26,17 +26,19 @@ test('then must be called after promise is fulfilled with value as its first arg
 		assert.equal(value, 'hello')
 	})
 })
-//
-// test('then should work with synchronous call to resolve', assert => {
-// 	assert.plan(1)
-// 	bluff(function(resolve) {
-// 		resolve('hello')
-// 	}).then(function(value) {
-// 		assert.equal(value, 'hello')
-// 	})
-// })
-//
-//
+
+test('then should work with synchronous call to resolve', assert => {
+	assert.plan(1)
+	var promise = bluff(function(resolve) {
+		resolve('hello')
+	})
+
+	promise.then(function(value) {
+		assert.equal(value, 'hello')
+	})
+})
+
+
 // test('then must be called after promise is rejected with reason as its first argument', assert => {
 // 	assert.plan(1)
 // 	var promise = bluff(function(resolve, reject) {
