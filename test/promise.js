@@ -83,6 +83,28 @@ test('then may be called multiple times on the same promise if resolved', assert
 	})
 })
 
+test('then may be called multiple times before or after promise has been resolved', assert => {
+	assert.plan(2)
+	var result
+	var promise = bluff(function(resolve) {
+		setTimeout(function() {
+			resolve('hello')
+		}, 100)
+	})
+
+	promise.then(function(value) {
+		result = value
+	})
+
+	setTimeout(function() {
+		promise.then(function(value) {
+			assert.equal(value, 'hello')
+			assert.equal(result, 'hello')
+		})
+	}, 400)
+
+})
+
 //
 // test('then may be called multiple times on the same promise if rejected', assert => {
 // 	assert.plan(2)
