@@ -52,16 +52,18 @@ test('then must be called after promise is rejected with reason as its first arg
 	})
 })
 
-// test('then should work with synchronous call to reject', assert => {
-// 	assert.plan(1)
-// 	bluff(function(resolve, reject) {
-// 		reject('hello')
-// 	}).then(null, function(reason) {
-// 		assert.equal(reason, 'hello')
-// 	})
-// })
-//
-//
+test('then should work with synchronous call to reject', assert => {
+	assert.plan(1)
+	var promise = bluff(function(resolve, reject) {
+		reject('hello')
+	})
+
+	promise.then(null, function(reason) {
+		assert.equal(reason, 'hello')
+	})
+})
+
+
 // test('then may be called multiple times on the same promise if resolved', assert => {
 // 	assert.plan(2)
 // 	var result
