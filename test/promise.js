@@ -155,19 +155,19 @@ test('returned promise should take as value the value returned by the previous p
 	}, 400)
 })
 
-// test('returned promise should take as reason the reason returned by the previous promise', assert => {
-// 	assert.plan(1)
-// 	bluff(function(resolve, reject) {
-// 		setTimeout(function() {
-// 			reject('hello')
-// 		}, 100)
-// 	}).then(null, function(reason) {
-// 		return reason + ' world'
-// 	}).then(null, function(reason) {
-// 		assert.equal(reason, 'hello world')
-// 	})
-// })
-//
+test('returned promise should take as reason the reason returned by the previous promise', assert => {
+	assert.plan(1)
+	bluff(function(resolve, reject) {
+		setTimeout(function() {
+			reject('hello')
+		}, 100)
+	}).then(null, function(reason) {
+		return reason + ' world'
+	}).then(null, function(reason) {
+		assert.equal(reason, 'hello world')
+	})
+})
+
 // test('If onFullfilled throws an exception e, promise2 must be rejected with e as the reason.', assert => {
 // 	assert.plan(1)
 // 	bluff(function(resolve) {
