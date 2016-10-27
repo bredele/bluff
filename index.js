@@ -32,6 +32,9 @@ module.exports = function promise(resolver) {
         rejected.push(reject)
       } else if(state == 'fulfilled') fulfill(result)
       else reject(result)
+      return promise(function() {
+        
+      })
     }
   }
 }
