@@ -30,7 +30,11 @@ module.exports = function promise(resolver) {
       return promise(function(success, error) {
         if(state == 'pending') {
           fulfilled.push(function(value) {
-            success(fulfill(value))
+            try {
+              success(fulfill(value))
+            } catch(e) {
+              error(e)
+            }
           })
           rejected.push(function(reason) {
             error(reject(reason))
