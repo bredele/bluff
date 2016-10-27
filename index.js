@@ -30,7 +30,6 @@ module.exports = function promise(resolver) {
       if(typeof fulfill != 'function') fulfill = function(value) {
         return value
       }
-
       if(typeof reject != 'function') reject = function(reason) {
         return reason
       }
