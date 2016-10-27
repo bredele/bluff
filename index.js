@@ -16,24 +16,27 @@ module.exports = function promise(resolver) {
     state = 'fulfilled'
     result = value
     fulfilled.map(function(cb) {
-      cb(value)
+      cb(result)
     })
   }, function(reason) {
     state = 'rejected'
     result = reason
     rejected.map(function(cb) {
-      cb(reason)
+      cb(result)
     })
   })
   return {
     then: function(fulfill, reject) {
-      if(state == 'pending') {
-        fulfilled.push(fulfill)
-        rejected.push(reject)
-      } else if(state == 'fulfilled') fulfill(result)
-      else reject(result)
-      return promise(function() {
-        
+      return promise(function(success, error) {
+        if(state == 'pending') {
+          fulfilled.push(function(value) {
+            success(fulfill(value))
+          })
+          rejected.push(function(reason) {
+            error(reject(reason))
+          })
+        } else if(state == 'fulfilled') success(fulfill(result))
+        else error(reject(result))
       })
     }
   }

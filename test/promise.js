@@ -145,9 +145,11 @@ test('returned promise should take as value the value returned by the previous p
 		return value + ' world'
 	})
 
-	promise.then(function(value) {
-		assert.equal(value, 'hello world')
-	})
+  setTimeout(function() {
+		promise.then(function(value) {
+			assert.equal(value, 'hello world')
+		})
+	}, 400)
 })
 
 // test('returned promise should take as reason the reason returned by the previous promise', assert => {
