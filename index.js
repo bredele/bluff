@@ -27,6 +27,13 @@ module.exports = function promise(resolver) {
   })
   return {
     then: function(fulfill, reject) {
+      if(typeof fulfill != 'function') fulfill = function(value) {
+        return value
+      }
+
+      if(typeof reject != 'function') reject = function(reason) {
+        return reason
+      }
       return promise(function(success, error) {
         if(state == 'pending') {
           fulfilled.push(function(value) {

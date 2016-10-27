@@ -193,18 +193,18 @@ test('If onRejected throws an exception e, promise2 must be rejected with e as t
 		assert.equal(reason, 'this is an exception')
 	})
 })
-//
-// test('If onFulfilled is not a function and promise1 is fulfilled, promise2 must be fulfilled with the same value as promise1', assert => {
-// 	assert.plan(1)
-// 	bluff(function(resolve) {
-// 		setTimeout(function() {
-// 			resolve('hello')
-// 		}, 100)
-// 	}).then(null).then(function(value) {
-// 		assert.equal(value, 'hello')
-// 	})
-// })
-//
+
+test('If onFulfilled is not a function and promise1 is fulfilled, promise2 must be fulfilled with the same value as promise1', assert => {
+	assert.plan(1)
+	bluff(function(resolve) {
+		setTimeout(function() {
+			resolve('hello')
+		}, 100)
+	}).then(null).then(function(value) {
+		assert.equal(value, 'hello')
+	})
+})
+
 // test('If onRejected is not a function and promise1 is rejected, promise2 must be rejected with the same reason as promise1', assert => {
 // 	assert.plan(1)
 // 	bluff(function(resolve, reject) {
