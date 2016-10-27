@@ -136,7 +136,7 @@ test('then must return a promise', assert => {
 })
 
 test('returned promise should take as value the value returned by the previous promise', assert => {
-	assert.plan(1)
+	assert.plan(2)
 	var promise = bluff(function(resolve) {
 		setTimeout(function() {
 			resolve('hello')
@@ -146,6 +146,9 @@ test('returned promise should take as value the value returned by the previous p
 	})
 
   setTimeout(function() {
+		promise.then(function(value) {
+			assert.equal(value, 'hello world')
+		})
 		promise.then(function(value) {
 			assert.equal(value, 'hello world')
 		})
