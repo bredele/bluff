@@ -27,18 +27,18 @@ test('should return a promise passed as argument', assert => {
 })
 
 
-test('should combine and resolve multiple promises into a single promise', assert => {
-  assert.plan(1)
-  var first = bluff('hello')
-  var second = bluff(function(resolve) {
-    setTimeout(() => resolve('world'), 700)
-  })
-  bluff(first, second).then(function(value) {
-    assert.deepEqual(value, ['hello', 'world'])
-  })
-})
+// test('should combine and resolve multiple promises into a single promise', assert => {
+//   assert.plan(1)
+//   var first = bluff('hello')
+//   var second = bluff(function(resolve) {
+//     setTimeout(() => resolve('world'), 700)
+//   })
+//   bluff(first, second).then(function(value) {
+//     assert.deepEqual(value, ['hello', 'world'])
+//   })
+// })
 
-// 
+//
 // test('should combine and reject multiple promises into a single promise', assert => {
 //   assert.plan(1)
 //   var first = bluff('hello')

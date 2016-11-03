@@ -4,14 +4,12 @@
  */
 
 module.exports = function(resolver) {
-  if(typeof resolver != 'function') {
-    if(typeof resolver.then == 'function') return resolver
-    var value = resolver
-    resolver = function(resolve) {
-      resolve(value)
-    }
-  }
-  return promise(resolver)
+  var bool = typeof resolver == 'function'
+  return promise(bool
+    ? resolver
+    : function(resolve, reject) {
+      resolve(resolver)
+    })
 }
 
 
