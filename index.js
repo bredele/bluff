@@ -9,6 +9,7 @@
 
 module.exports = function promise(resolver) {
   if(typeof resolver != 'function') {
+    if(typeof resolver.then == 'function') return resolver
     var value = resolver
     resolver = function(resolve) {
       resolve(value)

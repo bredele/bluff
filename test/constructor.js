@@ -17,3 +17,15 @@ test('should return a promise from a value different than a promise or function'
     })
   })
 })
+
+test('should return a promise passed as argument', assert => {
+  assert.plan(1)
+  var promise = bluff(function(resolve) {
+    setTimeout(() => {
+      resolve('hello')
+    }, 500)
+  })
+  bluff(promise).then(function(value) {
+    assert.equal(value, 'hello')
+  })
+})
