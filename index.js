@@ -1,13 +1,9 @@
 
 /**
- * Promise A+ implementation.
- *
- * @param {Function} resolver
- * @return thenable
- * @api public
+ * Expose `bluff`
  */
 
-module.exports = function promise(resolver) {
+module.exports = function(resolver) {
   if(typeof resolver != 'function') {
     if(typeof resolver.then == 'function') return resolver
     var value = resolver
@@ -15,6 +11,19 @@ module.exports = function promise(resolver) {
       resolve(value)
     }
   }
+  return promise(resolver)
+}
+
+
+/**
+ * Promise A+ implementation.
+ *
+ * @param {Function} resolver
+ * @return thenable
+ * @api public
+ */
+
+function promise(resolver) {
   var state = 'pending'
   var result
   var fulfilled = []
