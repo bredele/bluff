@@ -8,6 +8,12 @@
  */
 
 module.exports = function promise(resolver) {
+  if(typeof resolver != 'function') {
+    var value = resolver
+    resolver = function(resolve) {
+      resolve(value)
+    }
+  }
   var state = 'pending'
   var result
   var fulfilled = []
