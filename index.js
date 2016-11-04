@@ -8,7 +8,8 @@ module.exports = function(resolver) {
   return promise(bool
     ? resolver
     : function(resolve, reject) {
-      resolve(resolver)
+      if(typeof resolver.then == 'function') resolver.then(resolve)
+      else resolve(resolver)
     })
 }
 
