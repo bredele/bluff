@@ -5,7 +5,11 @@
   [![Downloads](https://img.shields.io/npm/dm/bluff.svg)](http://npm-stat.com/charts.html?package=bluff)
   [![pledge](https://bredele.github.io/contributing-guide/community-pledge.svg)](https://github.com/bredele/contributing-guide/blob/master/guidelines.md)
 
-Ridiculously small promise implementation based on the [A+ spec](/test). Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
+Ridiculously small and powerful promise implementation based on the [A+ spec](/test).
+
+* **Interoperable**: Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
+* **Combination**: Bluff allows you to elegantly combine multiple promises into a promise that is resolved when all of the input promises are resolved.
+* **Standardization**: Bluff helps reducing difference of implementation in your code according you are dealing with synchronous or asynchronous computations. Any value passed to Bluff is transformed into a promise (see [documentation](/docs)).
 
 [Try it online!](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a)
 
