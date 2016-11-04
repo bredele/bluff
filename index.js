@@ -3,14 +3,35 @@
  * Expose `bluff`
  */
 
-module.exports = function(resolver) {
-  var bool = typeof resolver == 'function'
-  return promise(bool
-    ? resolver
-    : function(resolve, reject) {
-      if(typeof resolver.then == 'function') resolver.then(resolve)
-      else resolve(resolver)
+module.exports = bluff
+
+
+function bluff(resolver) {
+  if(arguments.length > 1) {
+    return promise(all.bind(null, [].slice.call(arguments)))
+  } else {
+    return promise(typeof resolver == 'function'
+      ? resolver
+      : function(resolve, reject) {
+        if(typeof resolver.then == 'function') resolver.then(resolve)
+        else resolve(resolver)
+      }
+    )
+  }
+}
+
+
+function all(args, resolve, reject) {
+  var result = []
+  var length = args.length - 1
+  args.map(function(item, i) {
+    bluff(item).then(function(value) {
+      result.push(value)
+      if(i == length) resolve(result)
+    }, function(reason) {
+      reject(reason)
     })
+  })
 }
 
 
