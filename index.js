@@ -13,7 +13,7 @@ function bluff(resolver) {
     return promise(typeof resolver == 'function'
       ? resolver
       : function(resolve, reject) {
-        if(typeof resolver.then == 'function') resolver.then(resolve)
+        if(typeof resolver.then == 'function') resolver.then(resolve, reject)
         else resolve(resolver)
       }
     )
