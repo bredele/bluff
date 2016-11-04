@@ -6,6 +6,26 @@
 module.exports = bluff
 
 
+/**
+ * Bluff constructor.
+ *
+ * The bluff function accepts functions, promises or any type of
+ * argument (the argument will be returned as the promise value).
+ * When multiple arguments, bluff will create promises for every argument
+ * and combine them.
+ *
+ * Examples:
+ *
+ *  bluff(function(resolve, reject) {})
+ *  bluff(promise)
+ *  bluff('hello')
+ *  bluff('hello', promise, function(resolve, reject) {})
+ *
+ * @param {Function} resolver
+ * @return thenable
+ * @api public
+ */
+
 function bluff(resolver) {
   if(arguments.length > 1) {
     return promise(all.bind(null, [].slice.call(arguments)))
@@ -20,6 +40,17 @@ function bluff(resolver) {
   }
 }
 
+
+/**
+ * Combine multiple promises and/or value
+ * and return resolver function.
+ *
+ * @param {Array} args
+ * @param {Function} resolve
+ * @param {Function} reject
+ * @return {Function}
+ * @api public
+ */
 
 function all(args, resolve, reject) {
   var result = []
@@ -43,6 +74,7 @@ function all(args, resolve, reject) {
  * @api public
  */
 
+bluff.promise = promise
 function promise(resolver) {
   var state = 'pending'
   var result
