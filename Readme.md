@@ -9,9 +9,9 @@ Ridiculously small and powerful promise implementation based on the [A+ spec](/t
 
 * **Interoperable**: Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
 * **Combination**: Bluff allows you to elegantly combine multiple promises into a promise that is resolved when all of the input promises are resolved.
-* **Standardization**: Bluff helps reducing difference of implementation in your code according you are dealing with synchronous or asynchronous computations. Any value passed to Bluff is transformed into a promise (see [documentation](/docs)).
+* **Standardization**: Bluff helps reducing difference of implementation in your code according you are dealing with synchronous or asynchronous computations. Any value passed to Bluff is transformed into a promise.
 
-[Try it online!](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a)
+[Learn more](/docs) or [Try it online!](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a)
 
 ## Usage
 

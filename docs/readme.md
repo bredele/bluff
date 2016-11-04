@@ -1,3 +1,5 @@
+![bluff](http://s2.quickmeme.com/img/c7/c7f713588d90023b76daa9b748ad2156db3a23f195d1d680c985bf0622c6aa39.jpg)
+
 A Promise object is used for asynchronous computations and represents a value which may be available now, or in the future, or never.
 
 For more information about Promises, please read this excellent [documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or the [bluff spec](/test)
