@@ -106,7 +106,7 @@ function promise(resolver) {
           fulfilled.push(function(value) {
             try {
               var result = fulfill(value)
-              if(result && typeof result.then == 'function') {
+              if(typeof result.then == 'function') {
                 result.then(success)
               } else {
                 success(result)
