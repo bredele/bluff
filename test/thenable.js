@@ -226,3 +226,14 @@ test('if value returned by promise 1 is a fulfilled promise, fulfill promise2 wi
 		})
 	}).then(value => assert.equal(value, 'hello world'))
 })
+
+test('if value returned by promise 1 is a rejected promise, reject promise2 with the same reason', assert => {
+	assert.plan(1)
+	bluff((resolve, reject) => {
+		setTimeout(() => reject('hello'), 500)
+	}).then(null, reason => {
+		return bluff((resolve, reject) => {
+			setTimeout(() => reject(reason + ' world'), 500)
+		})
+	}).then(null, reason => assert.equal(reason, 'hello world'))
+})

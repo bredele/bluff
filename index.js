@@ -106,18 +106,17 @@ function promise(resolver) {
           fulfilled.push(function(value) {
             try {
               var result = fulfill(value)
-              if(typeof result.then == 'function') {
-                result.then(success)
-              } else {
-                success(result)
-              }
+              if(result && typeof result.then == 'function') result.then(success)
+              else success(result)
             } catch(e) {
               error(e)
             }
           })
           rejected.push(function(reason) {
             try {
-              error(reject(reason))
+              var result = reject(reason)
+              if(result && typeof result.then == 'function') result.then(null, error)
+              else error(result)
             } catch(e) {
               error(e)
             }
