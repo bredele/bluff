@@ -105,7 +105,12 @@ function promise(resolver) {
         if(state == 'pending') {
           fulfilled.push(function(value) {
             try {
-              success(fulfill(value))
+              var result = fulfill(value)
+              if(result && typeof result.then == 'function') {
+                result.then(success)
+              } else {
+                success(result)
+              }
             } catch(e) {
               error(e)
             }

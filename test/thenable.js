@@ -218,7 +218,11 @@ test('If onRejected is not a function and promise1 is rejected, promise2 must be
 
 test('if value returned by promise 1 is a fulfilled promise, fulfill promise2 with the same value', assert => {
 	assert.plan(1)
-	bluff('hello')
-	  .then(value => bluff(value + ' world'))
-		.then(value => assert.equal(value, 'hello world'))
+	bluff(resolve => {
+		setTimeout(() => resolve('hello'), 500)
+	}).then(value => {
+		return bluff(resolve => {
+			setTimeout(() => resolve(value + ' world'), 500)
+		})
+	}).then(value => assert.equal(value, 'hello world'))
 })
