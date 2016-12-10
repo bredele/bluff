@@ -237,3 +237,23 @@ test('if value returned by promise 1 is a rejected promise, reject promise2 with
 		})
 	}).then(null, reason => assert.equal(reason, 'hello world'))
 })
+
+test('it should resolve then only once', assert => {
+  assert.plan(1)
+	var result = ''
+	bluff(resolve => {
+		resolve('hello')
+		resolve('other')
+	}).then(value => result += value)
+	assert.equal(result, 'hello')
+})
+
+test('it should reject then only once', assert => {
+  assert.plan(1)
+	var result = ''
+	bluff((resolve, reject) => {
+		reject('hello')
+		reject('other')
+	}).then(null, reason => result += reason)
+	assert.equal(result, 'hello')
+})

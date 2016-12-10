@@ -81,12 +81,14 @@ function promise(resolver) {
   var fulfilled = []
   var rejected = []
   resolver(function(value) {
+    if(state != 'pending') return;
     state = 'fulfilled'
     result = value
     fulfilled.map(function(cb) {
       cb(result)
     })
   }, function(reason) {
+    if(state != 'pending') return;
     state = 'rejected'
     result = reason
     rejected.map(function(cb) {
