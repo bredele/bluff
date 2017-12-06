@@ -22,17 +22,27 @@ module.exports = bluff
  *  bluff('hello', promise, function(resolve, reject) {})
  *
  * @param {Function} value
- * @return thenable
+ * @return {Promise}
  * @api public
  */
 
 function bluff(value) {
-  if(arguments.length > 1) {
-    return Promise.all([].map.call(arguments, resolver))
-  } else {
-    return resolver(value)
-  }
+  return arguments.length > 1
+    ? Promise.all([].map.call(arguments, resolver))
+    : resolver(value)
 }
+
+
+/**
+ * Resolve value into a promise.
+ *
+ * If a value is different than a function or a stream, the value
+ * will be resolved into a promise. For a stream, resolver will
+ * return a promise that is rejected if any error, resolved otherwise.
+ *
+ * @param {Any} value
+ * @return {Promise}
+ */
 
 function resolver (value) {
   if (typeof value === 'function') return new Promise(value)
