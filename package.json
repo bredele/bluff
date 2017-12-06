@@ -1,7 +1,7 @@
 {
   "name": "bluff",
-  "version": "1.0.0",
-  "description": "Small promise implementation based on the A+ spec",
+  "version": "2.0.0",
+  "description": "Transform everything into a promise",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
@@ -25,5 +25,8 @@
     "browserify": "^13.1.1",
     "tape": "^4.6.2",
     "tape-run": "^2.1.4"
+  },
+  "dependencies": {
+    "stream-then": "^1.1.1"
   }
 }

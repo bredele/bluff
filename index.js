@@ -1,9 +1,9 @@
-
 /**
- * Expose `bluff`
+ * Dependencies
  */
 
-module.exports = bluff
+var thenable = require('stream-then')
+
 
 
 /**
@@ -26,7 +26,7 @@ module.exports = bluff
  * @api public
  */
 
-function bluff(value) {
+module.exports = function (value) {
   return arguments.length > 1
     ? Promise.all([].map.call(arguments, resolver))
     : resolver(value)
@@ -46,5 +46,8 @@ function bluff(value) {
 
 function resolver (value) {
   if (typeof value === 'function') return new Promise(value)
+  else if (value != null && typeof value === 'object' && typeof value.pipe === 'function') {
+    return thenable(value, true)
+  }
   return Promise.resolve(value)
 }

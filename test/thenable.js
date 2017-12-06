@@ -4,7 +4,7 @@
 
 var test = require('tape')
 var bluff = require('..')
-
+const Readable = require('stream').Readable
 
 test('should return a thenable object', assert => {
 	assert.plan(1)
@@ -237,3 +237,33 @@ test('if value returned by promise 1 is a rejected promise, reject promise2 with
 		})
 	}).then(null, reason => assert.equal(reason, 'hello world'))
 })
+
+
+test('it should resolve a stream as a buffer', assert => {
+	assert.plan(1)
+	bluff(stream())
+	  .then(value => {
+			assert.equal(value.toString(), 'helloworld')
+		})
+})
+
+
+
+/**
+ * Create readable stream returning helloworld
+ * after 1 second.
+ *
+ * @return {Stream}
+ * @api private
+ */
+
+function stream() {
+  const data = new Readable
+  data._read = function() {}
+  setTimeout(() => {
+    data.push('hello')
+		data.push('world')
+    data.push(null)
+  }, 1000)
+  return data
+}
