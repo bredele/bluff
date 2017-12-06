@@ -5,24 +5,24 @@
   [![Downloads](https://img.shields.io/npm/dm/bluff.svg)](http://npm-stat.com/charts.html?package=bluff)
   [![pledge](https://bredele.github.io/contributing-guide/community-pledge.svg)](https://github.com/bredele/contributing-guide/blob/master/guidelines.md)
 
-Ridiculously small and powerful **promise** implementation based on the [A+ spec](/test).
+Transform everything into a **promise**.
 
-* **Interoperable**: Bluff does not deal with how to create, fulfill, or reject promises, choosing instead to focus on providing an interoperable `then` method.
-* **Combination**: Bluff allows you to elegantly combine multiple promises into a promise that is resolved when all of the input promises are resolved.
-* **Standardization**: Bluff helps reducing difference of implementation in your code according you are dealing with synchronous or asynchronous computations. Any value passed to Bluff is transformed into a promise.
+* **Standardization**: Bluff helps reducing difference of implementation in your code according you are dealing with synchronous or asynchronous computations. Any value passed to Bluff is transformed into a promise. Even streams!
+* **Combination**: Bluff resolves when all of the promises in the iterable argument have resolved and when all or some of the the iterable argument contains no promises.
+
 
 [Learn more](/docs) or [Try it online!](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a)
 
 ## Usage
 
 ```js
-var Promise = require('bluff')
+var promise = require('bluff')
 
 function readJSON(filename){
-  return new Promise(function (fulfill, reject){
+  return promise(function (resolve, reject){
     readFile(filename, 'utf8').done(function (res){
       try {
-        fulfill(JSON.parse(res));
+        resolve(JSON.parse(res));
       } catch (ex) {
         reject(ex);
       }
@@ -30,7 +30,14 @@ function readJSON(filename){
   });
 }
 
-readJSON('package.json').then(data => doSomething(data))
+// combination example
+
+promise(
+  readJSON('package.json'),
+  'and dome other text'
+).then(data => {
+  // do something
+})
 ```
 
 Check out [examples](http://requirebin.com/?gist=820863755c8ce2664c5bf3ebfd17458a) and [tests](/test) for more information.
