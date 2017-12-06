@@ -21,111 +21,20 @@ module.exports = bluff
  *  bluff('hello')
  *  bluff('hello', promise, function(resolve, reject) {})
  *
- * @param {Function} resolver
+ * @param {Function} value
  * @return thenable
  * @api public
  */
 
-function bluff(resolver) {
+function bluff(value) {
   if(arguments.length > 1) {
-    return promise(all.bind(null, [].slice.call(arguments)))
+    return Promise.all([].map.call(arguments, resolver))
   } else {
-    return promise(typeof resolver == 'function'
-      ? resolver
-      : function(resolve, reject) {
-        if(typeof resolver.then == 'function') resolver.then(resolve, reject)
-        else resolve(resolver)
-      }
-    )
+    return resolver(value)
   }
 }
 
-
-/**
- * Combine multiple promises and/or value
- * and return resolver function.
- *
- * @param {Array} args
- * @param {Function} resolve
- * @param {Function} reject
- * @return {Function}
- * @api public
- */
-
-function all(args, resolve, reject) {
-  var result = []
-  var length = args.length - 1
-  args.map(function(item, i) {
-    bluff(item).then(function(value) {
-      result.push(value)
-      if(i == length) resolve(result)
-    }, function(reason) {
-      reject(reason)
-    })
-  })
-}
-
-
-/**
- * Promise A+ implementation.
- *
- * @param {Function} resolver
- * @return thenable
- * @api public
- */
-
-bluff.promise = promise
-function promise(resolver) {
-  var state = 'pending'
-  var result
-  var fulfilled = []
-  var rejected = []
-  resolver(function(value) {
-    if(state != 'pending') return;
-    state = 'fulfilled'
-    result = value
-    fulfilled.map(function(cb) {
-      cb(result)
-    })
-  }, function(reason) {
-    if(state != 'pending') return;
-    state = 'rejected'
-    result = reason
-    rejected.map(function(cb) {
-      cb(result)
-    })
-  })
-  return {
-    then: function(fulfill, reject) {
-      if(typeof fulfill != 'function') fulfill = function(value) {
-        return value
-      }
-      if(typeof reject != 'function') reject = function(reason) {
-        return reason
-      }
-      return promise(function(success, error) {
-        if(state == 'pending') {
-          fulfilled.push(function(value) {
-            try {
-              var result = fulfill(value)
-              if(result && typeof result.then == 'function') result.then(success)
-              else success(result)
-            } catch(e) {
-              error(e)
-            }
-          })
-          rejected.push(function(reason) {
-            try {
-              var result = reject(reason)
-              if(result && typeof result.then == 'function') result.then(null, error)
-              else error(result)
-            } catch(e) {
-              error(e)
-            }
-          })
-        } else if(state == 'fulfilled') success(fulfill(result))
-        else error(reject(result))
-      })
-    }
-  }
+function resolver (value) {
+  if (typeof value === 'function') return new Promise(value)
+  return Promise.resolve(value)
 }
